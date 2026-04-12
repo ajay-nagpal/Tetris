@@ -1,0 +1,18 @@
+class Colors:
+    light_grey=(200,200,200)
+    green=(47,230,23)
+    red=(232,18,18)
+    orange=(226,116,17)
+    yellow=(237,234,4)
+    purple=(166,0,247)
+    cyan=(21,204,209)
+    blue=(13,64,216)
+
+    @classmethod
+    def get_cell_colors(cls):
+        #we will draw in same order
+        return [cls.light_grey,cls.green,cls.red
+                ,cls.orange,cls.yellow,cls.purple,
+                cls.cyan,cls.blue]
+
+

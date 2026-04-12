@@ -1,4 +1,5 @@
 import pygame
+from color import Colors
 
 class Grid:
     def __init__(self):
@@ -8,7 +9,9 @@ class Grid:
         self.grid=[[0 for j in range(self.cols)]for i in range(self.rows)]
         #7 block, each with unique color
         #light grey for empty
-        self.colors=self.get_cell_colors()
+        # self.colors=self.get_cell_colors()
+        self.colors=Colors.get_cell_colors()
+
 
     def print_grid(self):
         for row in range(self.rows):
@@ -16,19 +19,19 @@ class Grid:
                 print(self.grid[row][col],end=" ")
             print()
 
-    def get_cell_colors(self):
+    # def get_cell_colors(self):
 
-        light_grey=(200,200,200)
-        green=(47,230,23)
-        red=(232,18,18)
-        orange=(226,116,17)
-        yellow=(237,234,4)
-        purple=(166,0,247)
-        cyan=(21,204,209)
-        blue=(13,64,216)
+    #     light_grey=(200,200,200)
+    #     green=(47,230,23)
+    #     red=(232,18,18)
+    #     orange=(226,116,17)
+    #     yellow=(237,234,4)
+    #     purple=(166,0,247)
+    #     cyan=(21,204,209)
+    #     blue=(13,64,216)
 
-        #we will draw in same order
-        return [light_grey,green,red,orange,yellow,purple,cyan,blue]
+    #     #we will draw in same order
+    #     return [light_grey,green,red,orange,yellow,purple,cyan,blue]
 
     def draw_grid(self,game_screen,):
         for row in range(self.rows):
