@@ -1,4 +1,4 @@
 class Position:
-    def __init__(self,rows,cols):
-        self.rows=rows
-        self.cols=cols
+    def __init__(self,row,col):
+        self.row=row
+        self.col=col

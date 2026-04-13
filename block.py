@@ -44,7 +44,7 @@ class Block:
             #creaate a rectangle for each cell
             #pygame.Rect
             #same way we did in grid
-            tile_rect=pygame.Rect(tile.cols*self.cell_size+1,tile.rows*self.cell_size+1,
+            tile_rect=pygame.Rect(tile.col*self.cell_size+1,tile.row*self.cell_size+1,
                                   self.cell_size-1,self.cell_size-1)
             
             #now draw the cell
@@ -67,7 +67,7 @@ class Block:
         #loop through alll the tiles and add the offset to their position
 
         for position in tiles:
-            position=Position(position.rows+self.row_offset, position.cols+self.col_offset)
+            position=Position(position.row+self.row_offset, position.col+self.col_offset)
             #append this new position to the moved_tile list
             moved_tile.append(position)
 

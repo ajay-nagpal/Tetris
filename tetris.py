@@ -27,6 +27,10 @@ game_over=False
 # use  game loop
 game=Game()
 
+GAME_UPDATE=pygame.USEREVENT#to create custom events, llike slow moving down of a block
+#we will use it for block position update 
+pygame.time.set_timer(GAME_UPDATE,300)#300 milisecod move do2nw time instead of 60fpc
+
 while not exit_game:
 #handle events
     for event in pygame.event.get():
@@ -54,7 +58,12 @@ while not exit_game:
                 #handle that too
 
             #check bounmdry, cehck if tile is inside grid, create a menhod for that in grid
-
+        
+        #cehck for custom event
+        if event.type==GAME_UPDATE:
+            game.move_down()
+            # if reached bottom, still ewe can move it , fix this issue
+            #create lock block method call it in move down
          
         
         game_screen.fill(dark_grey_blue)
@@ -72,6 +81,9 @@ while not exit_game:
         #draw the block
         #block.draw_block(game_screen)
         game.draw_game(game_screen)
+
+        #move down automatically but not as fast as 60fps, slow down speed
+        #game.move_down()  removed handled using custom event 
 
         pygame.display.update()
         #let play in 60 fps
