@@ -41,3 +41,37 @@ class Grid:
         if self.grid[row][col]==0:
             return True
         return False 
+    
+    # now we need to clear the fully occupied rows and move downall incompleted rows above it
+    #first cehck if row is full
+    def is_row_full(self,row):
+        for col in range(self.cols):
+            if self.grid[row][col]==0:
+                return False
+        return True
+    
+    # now method rto clear teh row set each cell to zero
+    def clear_row(self,row):
+        for col in range(self.cols):
+            self.grid[row][col]=0
+
+    #move down by specific number of rows
+    def move_row_down(self,row,num_rows):
+        for col in range(self.cols):
+            self.grid[row+num_rows][col]=self.grid[row][col]
+            #clear it
+            self.grid[row][col]=0
+    
+    def clear_full_rows(self):
+        completed=0
+        #check for all rows form bottom to top if any completed , this will tell us 
+        # nums rows to shift and clear
+        for row in range(self.rows-1,0,-1):#19 to 0, 20 rows
+            if self.is_row_full(row):
+                self.clear_row(row)
+                completed+=1
+            elif completed>0:
+                self.move_row_down(row,completed)
+        return completed# to calculate the score
+            
+
