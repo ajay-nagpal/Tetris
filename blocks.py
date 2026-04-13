@@ -21,6 +21,11 @@ class LBlock(Block):
             3:[Position(0,0),Position(0,1),Position(1,1),Position(2,1)]
         }
 
+        #currently each block origin is top left (0,0)
+        #we need it to start from top middle
+        #initially move it to 4 cells to make it appear from middle
+        self.move(0,4)
+
 
 class JBlock(Block):
     
@@ -37,6 +42,7 @@ class JBlock(Block):
             2:[Position(1,0),Position(1,1),Position(1,2),Position(2,2)],
             3:[Position(0,1),Position(1,1),Position(2,0),Position(2,1)]
         }
+        self.move(0,4)
 
 
 class IBlock(Block):
@@ -54,6 +60,7 @@ class IBlock(Block):
             2:[Position(2,0),Position(2,1),Position(2,2),Position(2,3)],
             3:[Position(0,1),Position(1,1),Position(2,1),Position(3,1)]
         }
+        self.move(-1,4)#-1 becasue , ther will be one empty row on top at beginnign of this block
 
 
 class OBlock(Block):
@@ -67,10 +74,11 @@ class OBlock(Block):
         #value wil; be list , contiaing value of occupied cells
         self.cells={
             0:[Position(0,0),Position(0,1),Position(1,0),Position(1,1)],
-            # 1:[Position(0,0),Position(0,1),Position(1,0),Position(1,1)],
-            # 2:[Position(0,0),Position(0,1),Position(1,0),Position(1,1)],
-            # 3:[Position(0,0),Position(0,1),Position(1,0),Position(1,1)]
+            1:[Position(0,0),Position(0,1),Position(1,0),Position(1,1)],
+            2:[Position(0,0),Position(0,1),Position(1,0),Position(1,1)],
+            3:[Position(0,0),Position(0,1),Position(1,0),Position(1,1)]
         }
+        self.move(0,5)
 
 
 class SBlock(Block):
@@ -88,6 +96,7 @@ class SBlock(Block):
             2:[Position(1,1),Position(1,2),Position(2,0),Position(2,1)],
             3:[Position(0,0),Position(1,0),Position(1,1),Position(2,1)]
         }
+        self.move(0,4)
 
 
 class TBlock(Block):
@@ -105,6 +114,7 @@ class TBlock(Block):
             2:[Position(1,0),Position(1,1),Position(1,2),Position(2,1)],
             3:[Position(0,1),Position(1,0),Position(1,1),Position(2,1)]
         }
+        self.move(0,4)
 
 
 class ZBlock(Block):
@@ -122,6 +132,7 @@ class ZBlock(Block):
             2:[Position(1,0),Position(1,1),Position(2,1),Position(2,2)],
             3:[Position(0,1),Position(1,0),Position(1,1),Position(2,0)]
         }
+        self.move(0,4)
 
 
 

@@ -19,20 +19,6 @@ class Grid:
                 print(self.grid[row][col],end=" ")
             print()
 
-    # def get_cell_colors(self):
-
-    #     light_grey=(200,200,200)
-    #     green=(47,230,23)
-    #     red=(232,18,18)
-    #     orange=(226,116,17)
-    #     yellow=(237,234,4)
-    #     purple=(166,0,247)
-    #     cyan=(21,204,209)
-    #     blue=(13,64,216)
-
-    #     #we will draw in same order
-    #     return [light_grey,green,red,orange,yellow,purple,cyan,blue]
-
     def draw_grid(self,game_screen,):
         for row in range(self.rows):
             for col in range(self.cols):
@@ -43,3 +29,10 @@ class Grid:
 
                 #now draw
                 pygame.draw.rect(game_screen,self.colors[cell_value],cell_rect)# sureface to draw on, color and rect, surface we have in tetris.p as game_screen
+
+
+    def is_inside_grid(self,row,col):
+        if row>=0 and row<self.rows and col>=0 and col<self.cols:
+            return True
+        return False
+    #add a methjod in game class to cehk inside a game window
