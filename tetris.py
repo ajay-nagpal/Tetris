@@ -47,9 +47,14 @@ while not exit_game:
                 game.move_right()
             elif event.key==pygame.K_DOWN:
                 game.move_down()
+            
+            elif event.key==pygame.K_UP:#rotate bklock
+                #block might go out of bound
+                game.rotate()
+                #handle that too
 
             #check bounmdry, cehck if tile is inside grid, create a menhod for that in grid
-            
+
          
         
         game_screen.fill(dark_grey_blue)

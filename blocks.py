@@ -73,10 +73,7 @@ class OBlock(Block):
         #key will be rotation state(0 to 3)
         #value wil; be list , contiaing value of occupied cells
         self.cells={
-            0:[Position(0,0),Position(0,1),Position(1,0),Position(1,1)],
-            1:[Position(0,0),Position(0,1),Position(1,0),Position(1,1)],
-            2:[Position(0,0),Position(0,1),Position(1,0),Position(1,1)],
-            3:[Position(0,0),Position(0,1),Position(1,0),Position(1,1)]
+            0:[Position(0,0),Position(0,1),Position(1,0),Position(1,1)]
         }
         self.move(0,5)
 

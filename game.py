@@ -56,4 +56,9 @@ class Game:
             if not self.grid.is_inside_grid(tile.rows,tile.cols):
                 return False
         return True
+    
+    def rotate(self):
+        self.current_block.rotate()
+        if not self.is_block_inside():
+            self.current_block.undo_rotate()
 

@@ -77,5 +77,18 @@ class Block:
         # we can use this get_cell_posiitons to get the tiles there
 
 
+    def rotate(self):
+        self.rotation_state+=1
+        #it might go beyond range so check
+        if self.rotation_state==len(self.cells):
+            self.rotation_state=0
+
+    #create a rotate method for game 
+
+    def undo_rotate(self):
+        self.rotation_state-=1
+        #it might go beyond range so check
+        if self.rotation_state==0:
+            self.rotation_state=len(self.cells)-1
 
 
