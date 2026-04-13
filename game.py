@@ -2,6 +2,7 @@
 from grid import Grid
 from blocks import *
 import random 
+import pygame # for adding sound effect
 
 class Game:
     def __init__(self):
@@ -15,7 +16,15 @@ class Game:
 
         self.game_over=False
         self.score=0
+        #background continuous sound
+        pygame.mixer.music.load("sounds/tetrisogg.ogg")
+        #now play this mujsic
+        pygame.mixer.music.play(-1)
 
+        self.rotate_sound=pygame.mixer.Sound("sounds/block_rotate.ogg")
+        self.lock_sound=pygame.mixer.Sound("sounds/lock_block.ogg")
+        self.game_over_sound=pygame.mixer.Sound("sounds/game_over.ogg")
+        self.row_clear_sound=pygame.mixer.Sound("sounds/row_clear.ogg")
 
     def get_random_block(self):
         #let each of the 7 blocks appear at least once before random appearance
@@ -67,18 +76,22 @@ class Game:
         for position in tiles:
             self.grid.grid[position.row][position.col]=self.current_block.id
         #now new blokc on the screen once current reaches final point
+        self.lock_sound.play()
         self.current_block=self.next_block
         #update next block with random block
         self.next_block=self.get_random_block()
         #clear row if any needed
         rows_cleared=self.grid.clear_full_rows()
+        if rows_cleared>0:
+            self.row_clear_sound.play()
         #save score
-        self.update_score(rows_cleared,0)
+            self.update_score(rows_cleared,0)
 
         #if the new block fits in the screen,  if not fit means overlap with other block
         #then game over
         if not self.block_fits():
             self.game_over=True 
+            self.game_over_sound.play()
             #now stop updating game in every 300 ms
 
 
@@ -105,6 +118,8 @@ class Game:
         self.current_block.rotate()
         if not self.is_block_inside() or not self.block_fits():
             self.current_block.undo_rotate()
+        else:
+            self.rotate_sound.play()
 
 
     def reset(self):
