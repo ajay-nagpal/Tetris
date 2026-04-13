@@ -14,6 +14,7 @@ class Game:
         self.next_block=self.get_random_block()
 
         self.game_over=False
+        self.score=0
 
 
     def get_random_block(self):
@@ -30,7 +31,9 @@ class Game:
     #this should have draw methods to draw on the screen
     def draw_game(self,screen):
         self.grid.draw_grid(screen)
-        self.current_block.draw_block(screen)
+        self.current_block.draw_block(screen,0,0)#offset taling 0,0 bcz we dont need ui separation layer in our game
+        #now draw next block on screen
+        self.next_block.draw_block(screen,380,380)
 
     def move_left(self):
         self.current_block.move(0,-1)#row,col, col will decrease, y,x, x-- left movement
@@ -68,7 +71,9 @@ class Game:
         #update next block with random block
         self.next_block=self.get_random_block()
         #clear row if any needed
-        self.grid.clear_full_rows()
+        rows_cleared=self.grid.clear_full_rows()
+        #save score
+        self.update_score(rows_cleared,0)
 
         #if the new block fits in the screen,  if not fit means overlap with other block
         #then game over
@@ -108,3 +113,15 @@ class Game:
         self.blocks=[IBlock(),JBlock(),LBlock(),OBlock(),SBlock(),TBlock(),ZBlock()]
         self.current_block=self.get_random_block()
         self.next_block=self.get_random_block()
+        self.score=0
+
+    def update_score(self,lines_cleared,moved_down_points):
+        #number of lines clear(100 for single line clear, 200 and 300 for 2 and 3 liens clear respectively) number of times a block moved down(1 point)
+        if lines_cleared==1:
+            self.score+=100
+        elif lines_cleared==2:
+            self.score+=200
+        elif lines_cleared==3:
+            self.score+=300
+        
+        self.score+=moved_down_points

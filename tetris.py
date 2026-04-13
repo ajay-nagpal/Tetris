@@ -67,6 +67,7 @@ while not exit_game:
                 game.move_right()
             elif event.key==pygame.K_DOWN and not game.game_over:
                 game.move_down()
+                game.update_score(0,1)
             
             elif event.key==pygame.K_UP and not game.game_over:#rotate bklock
                 #block might go out of bound
@@ -81,7 +82,6 @@ while not exit_game:
             # if reached bottom, still ewe can move it , fix this issue
             #create lock block method call it in move down
          
-        
         game_screen.fill(Colors.dark_grey_blue)
         
         game_screen.blit(score_surface,(590,20,50,50))
@@ -92,6 +92,15 @@ while not exit_game:
 
         if game.game_over:
             game_screen.blit(game_over_surface,(560,640,50,50))
+        
+        # created here cz score is dyn
+        score_value_surface=title_font.render(str(game.score),True,Colors.dark_grey_blue)#string that we want to display
+        #display score center of the surface
+        game_screen.blit(score_value_surface,
+                         score_value_surface.get_rect(centerx=score_rect.centerx,
+                         centery=score_rect.centery))
+
+
         #draw the screen
         #game_grid.draw_grid(game_screen) #use game class
         #this will show again blank , bcz currently all zeros and no margin 

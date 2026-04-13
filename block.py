@@ -24,12 +24,15 @@ class Block:
         self.col_offset=0
 
     #method to draw on block, we need to know the surface we going to draw
-    def draw_block(self,screen):
+    # in updated game later stage, we are showing next block that will apear on screen
+    # so for drawing that too we will use this method
+    #so we need 2 more parameters
+    #offset_x, offset_y(offset things are related to next block in this method)
+    def draw_block(self,screen,offset_x,offset_y):
         #we need the pos of each occupied ell of the block
         #in order to draw it on screen
         #create a new class named Position
         
-
         #this has now acccess to the rotation state of the blocks
 
         #self.cell is thjat specific block dect, let say L, then index it on totation state
@@ -44,7 +47,7 @@ class Block:
             #creaate a rectangle for each cell
             #pygame.Rect
             #same way we did in grid
-            tile_rect=pygame.Rect(tile.col*self.cell_size+1,tile.row*self.cell_size+1,
+            tile_rect=pygame.Rect(offset_x+tile.col*self.cell_size+1,offset_y+tile.row*self.cell_size+1,
                                   self.cell_size-1,self.cell_size-1)
             
             #now draw the cell
