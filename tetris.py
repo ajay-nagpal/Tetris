@@ -1,9 +1,28 @@
 import pygame,sys
 from game import Game 
+from color import Colors
+
 
 init_module=pygame.init()
 #set display size
-game_screen=pygame.display.set_mode((480,800))
+game_screen=pygame.display.set_mode((780,800))
+
+# for other game surface
+title_font=pygame.font.Font(None,40)#None=>use default font, 40 size
+#create a surface for the title
+score_surface=title_font.render("Score",True,Colors.light_grey)#string that we want to display
+#call block image transfer blit to make it appear on screen
+#inside agame loop
+
+#now create a rectangle obj to display score# dark grey color, light grey score
+score_rect=pygame.Rect(540,55,170,100)
+
+#same for title and others
+next_surface=title_font.render("Next Block",True,Colors.light_grey)#string that we want to display
+next_rect=pygame.Rect(520,320,210,190)
+
+
+game_over_surface=title_font.render("Game Over",True,Colors.light_grey)#string that we want to display
 
 #set title
 pygame.display.set_caption("T£tr!$")
@@ -12,19 +31,12 @@ pygame.display.set_caption("T£tr!$")
 #i.e.  how fast the game will run
 clock=pygame.time.Clock()
 
-dark_grey_blue=(62, 68, 81)#(26,31,41)#light grey
 
 #set game specific variables
 #to exit the game, wehn true game quit
 exit_game=False
-#similerly for game over
-game_over=False 
+#will set  game over condition in Game 
 
-
-#block.move(4,3)
-# fix game window 
-# and to take actions during game,
-# use  game loop
 game=Game()
 
 GAME_UPDATE=pygame.USEREVENT#to create custom events, llike slow moving down of a block
@@ -42,17 +54,21 @@ while not exit_game:
 
         #handle keypress event
         if event.type==pygame.KEYDOWN:
+            if game.game_over:
+                game.game_over=False
+                game.reset()
+                
             #which key
-            if event.key==pygame.K_LEFT:
+            if event.key==pygame.K_LEFT and not game.game_over:
                 #move block to the left
                 #create move_left() in game class to encapsulate things
                 game.move_left()
-            elif event.key==pygame.K_RIGHT:
+            elif event.key==pygame.K_RIGHT and not game.game_over:
                 game.move_right()
-            elif event.key==pygame.K_DOWN:
+            elif event.key==pygame.K_DOWN and not game.game_over:
                 game.move_down()
             
-            elif event.key==pygame.K_UP:#rotate bklock
+            elif event.key==pygame.K_UP and not game.game_over:#rotate bklock
                 #block might go out of bound
                 game.rotate()
                 #handle that too
@@ -60,14 +76,22 @@ while not exit_game:
             #check bounmdry, cehck if tile is inside grid, create a menhod for that in grid
         
         #cehck for custom event
-        if event.type==GAME_UPDATE:
+        if event.type==GAME_UPDATE and not game.game_over:
             game.move_down()
             # if reached bottom, still ewe can move it , fix this issue
             #create lock block method call it in move down
          
         
-        game_screen.fill(dark_grey_blue)
+        game_screen.fill(Colors.dark_grey_blue)
+        
+        game_screen.blit(score_surface,(590,20,50,50))
+        pygame.draw.rect(game_screen,Colors.light_grey,score_rect,0,10)
 
+        game_screen.blit(next_surface,(560,280,50,50))
+        pygame.draw.rect(game_screen,Colors.light_grey,next_rect,0,10)
+
+        if game.game_over:
+            game_screen.blit(game_over_surface,(560,640,50,50))
         #draw the screen
         #game_grid.draw_grid(game_screen) #use game class
         #this will show again blank , bcz currently all zeros and no margin 

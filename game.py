@@ -13,6 +13,8 @@ class Game:
         self.current_block=self.get_random_block()
         self.next_block=self.get_random_block()
 
+        self.game_over=False
+
 
     def get_random_block(self):
         #let each of the 7 blocks appear at least once before random appearance
@@ -68,7 +70,13 @@ class Game:
         #clear row if any needed
         self.grid.clear_full_rows()
 
-        
+        #if the new block fits in the screen,  if not fit means overlap with other block
+        #then game over
+        if not self.block_fits():
+            self.game_over=True 
+            #now stop updating game in every 300 ms
+
+
 
     def block_fits(self):
         tiles=self.current_block.get_cell_positions()
@@ -93,3 +101,10 @@ class Game:
         if not self.is_block_inside() or not self.block_fits():
             self.current_block.undo_rotate()
 
+
+    def reset(self):
+        self.grid.reset()
+        #create a list of all theblocks , assign current and next a random one
+        self.blocks=[IBlock(),JBlock(),LBlock(),OBlock(),SBlock(),TBlock(),ZBlock()]
+        self.current_block=self.get_random_block()
+        self.next_block=self.get_random_block()

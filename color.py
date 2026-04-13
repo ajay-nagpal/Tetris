@@ -7,6 +7,8 @@ class Colors:
     purple=(166,0,247)
     cyan=(21,204,209)
     blue=(13,64,216)
+    dark_grey_blue=(62, 68, 81)
+    light_blue=(59,85,162)
 
     @classmethod
     def get_cell_colors(cls):

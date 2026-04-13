@@ -73,5 +73,10 @@ class Grid:
             elif completed>0:
                 self.move_row_down(row,completed)
         return completed# to calculate the score
+    
+    def reset(self):
+        for row in range(self.rows):
+            for col in range(self.cols):
+                self.grid[row][col]=0
             
 
